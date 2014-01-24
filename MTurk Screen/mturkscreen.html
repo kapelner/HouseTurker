@@ -1,0 +1,173 @@
+<html>
+<head>
+<script>
+	setInterval(function(){document.getElementById("D1A").disabled = false;
+		document.getElementById("D1B").disabled = false},9000);
+	function button2() {
+		setInterval(function(){document.getElementById("D2A").disabled = false;
+		document.getElementById("D2B").disabled = false},9000);
+	}
+	function button3() {
+		setInterval(function(){document.getElementById("D3A").disabled = false;
+		document.getElementById("D3B").disabled = false},9000);
+	}
+	function button4() {
+		setInterval(function(){document.getElementById("D4A").disabled = false;
+		document.getElementById("D4B").disabled = false},9000);
+	}
+	function button5() {
+		setInterval(function(){document.getElementById("D5A").disabled = false;
+		document.getElementById("D5B").disabled = false},9000);
+	}
+	function isValidForm() {
+		x = ""
+		b = true
+		if (!(document.getElementById("D1A").checked || document.getElementById("D1B").checked)) {
+			x += "The first price has not been matched \n";
+			b = false;
+		}
+		if (!(document.getElementById("D2A").checked || document.getElementById("D2B").checked)) {
+			x += "The second price has not been matched \n"
+			b = false;
+		}
+		if (!(document.getElementById("D3A").checked || document.getElementById("D3B").checked)) {
+			x += "The third price has not been matched \n"
+			b = false;
+		}
+		if (!(document.getElementById("D4A").checked || document.getElementById("D4B").checked)) {
+			x += "The fourth price has not been matched \n"
+			b = false;
+		}
+		if (!(document.getElementById("D5A").checked || document.getElementById("D5B").checked)) {
+			x += "The fifth price has not been matched \n"
+			b = false;
+		}
+		if (x != "") {
+			document.getElementById("submitbutton").disabled = "disabled";
+		}
+		else {
+			document.getElementById("submitbutton").disabled = "";
+		}
+	}
+	function button1() {
+
+	}
+	</script>
+
+<style type="text/css">
+td.bottomBorder { border-collapse:collapse; border-bottom: 2px solid black; padding : 4px;}
+</style>
+
+</head>
+<body>
+<form method="get" name="Price" onclick="return isValidForm()" />
+<table border="0" cellpadding="10" cellspacing="10" width="750">
+	<tbody>
+		<tr>
+			<td colspan="2">The following two house descriptions correspond to the following two prices: <b>${CPrice1}</b> and <b>${CPrice2}</b></td>
+		</tr>
+		<tr height="0">
+			<td valign="top"><b>Description 1</b>:
+			<p>${Description 1}</p>
+			</td>
+			<td valign="top"><b>Description 2</b>:
+			<p>${Description 2}</p>
+
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" class = "bottomBorder">The Descriptions above correspond to prices of <b>${CPrice1}</b> and <b>${CPrice2}</b>. The one that best corresponds to a price of<br> <b>${CPrice1}</b> is:
+			<p><input id="D1A" name="group1" type="radio" value="D1A" onclick="isValidForm(); button2();" disabled = true/> <label for="D1A"/> Description 1 </label></p>
+
+			<p><input id="D1B" name="group1" type="radio" value="D1B" onclick="isValidForm(); button2();" disabled = true/> <label for="D1B"> Description 2 </label></p>
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">The following two house descriptions correspond to the following two prices: <b>${CPrice3}</b> and <b>${CPrice4}</b></td>
+		</tr>
+		<tr height="0">
+			<td valign="top"><b>Description 1</b>:
+			<p>${Description 3}</p>
+			</td>
+			<td valign="top"><b>Description 2</b>:
+			<p>${Description 4}</p>
+
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" class = "bottomBorder">The Descriptions above correspond to prices of <b>${CPrice3}</b> and <b>${CPrice4}</b>. The one that best corresponds to a price of<br> <b>${CPrice3}</b> is:
+			<p><input id="D2A" name="group2" type="radio" value="D2A" onclick="isValidForm(); button3();" disabled = true/> <label for="D2A"> Description 1 </label></p>
+
+			<p><input id="D2B" name="group2" type="radio" value="D2B" onclick="isValidForm(); button3();" disabled = true/> <label for="D2B"> Description 2 </label></p>
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">The following two house descriptions correspond to the following two prices: <b>${CPrice5}</b> and <b>${CPrice6}</b></td>
+		</tr>
+		<tr height="0">
+			<td valign="top"><b>Description 1</b>:
+			<p>${Description 5}</p>
+			</td>
+			<td valign="top"><b>Description 2</b>:
+			<p>${Description 6}</p>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" class = "bottomBorder">The Descriptions above correspond to prices of <b>${CPrice5}</b> and <b>${CPrice6}</b>. The one that best corresponds to a price of<br> <b>${CPrice5}</b> is:
+			<p><input id="D3A" name="group3" type="radio" value="D3A" onclick="isValidForm(); button4();" disabled = true/> <label for="D3A"> Description 1 </label></p>
+			<p><input id="D3B" name="group3" type="radio" value="D3B" onclick="isValidForm(); button4();" disabled = true/> <label for="D3B"> Description 2 </label></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">The following two house descriptions correspond to the following two prices: <b>${CPrice7}</b> and <b>${CPrice8}</b></td>
+		</tr>
+		<tr height="0">
+			<td valign="top"><b>Description 1</b>:
+			<p>${Description 7}</p>
+			</td>
+			<td valign="top"><b>Description 2</b>:
+			<p>${Description 8}</p>
+
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" class = "bottomBorder">The Descriptions above correspond to prices of <b>${CPrice7}</b> and <b>${CPrice8}</b>. The one that best corresponds to a price of<br> <b>${CPrice7}</b> is:
+			<p><input id="D4A" name="group4" type="radio" value="D4A" onclick="isValidForm(); button5();" disabled = true/> <label for="D4A"> Description 1 </label></p>
+			<p><input id="D4B" name="group4" type="radio" value="D4B" onclick="isValidForm(); button5();" disabled = true/> <label for="D4B"> Description 2 </label></p>
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">The following two house descriptions correspond to the following two prices: <b>${CPrice9}</b> and <b>${CPrice10}</b></td>
+		</tr>
+		<tr height="0">
+			<td valign="top"><b>Description 1</b>:
+			<p>${Description 9}</p>
+			</td>
+			<td valign="top"><b>Description 2</b>:
+			<p>${Description 10}</p>
+
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" class = "bottomBorder">The Descriptions above correspond to prices of <b>${CPrice9}</b> and <b>${CPrice10}</b>. The one that best corresponds to a price of<br> <b>${CPrice9}</b> is:
+			<p><input id="D5A" name="group5" type="radio" value="D5A" onclick="isValidForm()" disabled = true/> <label for="D5A"> Description 1 </label></p>
+			<p><input id="D5B" name="group5" type="radio" value="D5B" onclick="isValidForm()" disabled = true/> <label for="D5B"> Description 2 </label></p>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="0" width="750">
+	<tbody>
+		<tr align="center"> 
+			<td><input type="submit" value="Submit" id = "submitbutton" disabled="disabled" onclick="isValidForm()"/></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</body>
+</html>
