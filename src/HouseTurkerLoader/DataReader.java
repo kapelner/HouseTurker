@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
+// real y values are higher price - lower price
+// y hat are real_y if mturker got it right, negative if they got it wrong
+// x values are higher price desc - lower price desc
+// real_ratio is higher price / lower price
+// mturk ratio is real ratio if they got it correct, 1 / real_ratio otherwise
 public class DataReader {
   private Reader r;
   private WordDictionary d;
@@ -173,26 +178,32 @@ public class DataReader {
     // System.out.println("The correct answer is: " + a +
     // " The chosen answer is: " + b);
     int y_real;
+    DecimalFormat numberFormat = new DecimalFormat("#.####");
+    double real_ratio;
+    double mturk_ratio;
     if (p1 > p2) {
       y_real = p1 - p2;
+      real_ratio = (double) p1 / p2;
     } else {
       y_real = p2 - p1;
+      real_ratio = (double) p2 / p1;
     }
     int pdiff;
     if (a == b) {
       pdiff = y_real;
+      mturk_ratio = real_ratio;
     } else {
       pdiff = -y_real;
+      mturk_ratio = 1 / real_ratio;
     }
     if (p2 > p1) {
       for (int i = 0; i < arr.length; i++) {
         arr[i] = -arr[i];
       }
     }
-    // put the array (x values) and the answer key (y value) into the map
-    // m.put(arr, new Integer(pdiff));
-    // resets the array
     w.write(pdiff + " ");
+    w.write(numberFormat.format(real_ratio) + " ");
+    w.write(numberFormat.format(mturk_ratio) + " ");
     for (int i = 0; i < size; i++) {
       if (i != arr.length - 1) {
         w.write(arr[i] + " ");
