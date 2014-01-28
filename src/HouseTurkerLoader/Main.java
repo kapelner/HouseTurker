@@ -11,5 +11,6 @@ public class Main {
 		DataReader r = new DataReader(new FileReader(args[1]), dict);
 		r.readData();
 		dict.write();
+		System.out.println(dict.getSize());
 	}
 }
