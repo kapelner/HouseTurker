@@ -1,10 +1,10 @@
 #assume data is loaded
 
 #pull out X and y
-y = data_f[, 1]
+y = X[, 1]
 ybin = ifelse(y > 0, 1, 0)
 
-X = as.matrix(data_f[, 2 : ncol(data_f)])
+X = as.matrix(X[, 2 : ncol(X)])
 Xsub = X[, 1 : 100]
 
 
