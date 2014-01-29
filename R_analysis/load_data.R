@@ -21,4 +21,29 @@ sum(y_ratio_turk > 1) / length(y_ratio_turk)
 #X is just covariates now
 X = X[, 5 : ncol(X)]
 
+#now kill all variables that are zer
+Xabs = abs(X)
+Xabstots = apply(Xabs, 2, sum)
+table(Xabstots)
+
+dead_vars = names(Xabstots[Xabstots == 0])
+dead_vars = c(dead_vars, names(Xabstots[Xabstots == 1]))
+dead_vars = c(dead_vars, names(Xabstots[Xabstots == 2]))
+
+X = X[, !(colnames(X) %in% dead_vars)]
+
+
+rm(dead_vars)
+Xabs = abs(X)
+Xabstots = apply(Xabs, 2, sum)
+
+table(Xabstots)
+hist(Xabstots,br=500)
+Xtotsabs = sort(abs(Xabstots), decr = TRUE)
+
+#barplot(Xtotsabs)
+
+#let's order X by ostensibly the most informative covariates
+X = X[, names(sort(Xabstots, decr = TRUE))]
+
 save.image("raw.RData")

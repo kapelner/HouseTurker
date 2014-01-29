@@ -1,13 +1,23 @@
 #assume data is loaded
 
-X = as.matrix(X[, 2 : ncol(X)])
-Xsub = X[, 1 : 100]
+
+
+Xsub = as.matrix(X[, 1 : 500])
 
 
 #run some models
 
 
-mod = lm(y_diff ~ Xsub)
+mod = lm(y_diff_turk ~ Xsub)
+summary(mod)
+mod_coefs = coef(summary(mod))
+mod_coefs = mod_coefs[order(mod_coefs[, 4]), ]
+head(mod_coefs, 100)
+
+mod = lm(y_ratio_turk ~ Xsub)
+summary(mod)
+
+mod = lm(y_diff_turk_bin ~ Xsub)
 summary(mod)
 
 Xsub = X[, 1 : 1000]
@@ -18,10 +28,32 @@ summary(mod)
 library(glmnet)
 
 
-mod = cv.glmnet(Xsub, y_diff, alpha = 0)
+library(glmnet)
+mod = cv.glmnet(Xsub, y_diff_turk, alpha = 1) #lasso
+#mod = cv.glmnet(Xsub, y_diff_turk, alpha = 0) #ridge
+#mod = cv.glmnet(Xsub, y_diff_turk, alpha = 0.5) #even elastic net
 vars = coef(mod)
 vars = which(vars != 0) - 1
 vars
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Xsuby = cbind(X, y_diff)
