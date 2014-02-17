@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 // real_ratio is higher price / lower price
 // mturk ratio is real ratio if they got it correct, 1 / real_ratio otherwise
 
-public class DataReader {
+public class DataReader2 {
   private Reader r;
   private WordDictionary d;
   private LinkedHashMap<int[], Integer> m;
@@ -29,7 +29,7 @@ public class DataReader {
   private int counter;
   private PrintWriter w;
 
-  public DataReader(Reader r, WordDictionary d) throws IOException {
+  public DataReader2(Reader r, WordDictionary d) throws IOException {
     BufferedReader x = new BufferedReader(r);
     this.r = x;
     this.d = d;

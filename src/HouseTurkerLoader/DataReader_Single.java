@@ -18,26 +18,30 @@ import java.util.NoSuchElementException;
 // real_ratio is higher price / lower price
 // mturk ratio is real ratio if they got it correct, 1 / real_ratio otherwise
 
-public class DataReader {
+public class DataReader_Single {
   private Reader r;
   private WordDictionary d;
   private LinkedHashMap<int[], Integer> m;
   private int c;
   private final int size;
-  private HashSet<String> temps;
-  private int[] arr;
+  private HashSet<String> temps1;
+  private HashSet<String> temps2;
+  private int[] arr1;
+  private int[] arr2;
   private int counter;
   private PrintWriter w;
 
-  public DataReader(Reader r, WordDictionary d) throws IOException {
+  public DataReader_Single(Reader r, WordDictionary d) throws IOException {
     BufferedReader x = new BufferedReader(r);
     this.r = x;
     this.d = d;
     m = new LinkedHashMap<int[], Integer>();
     c = r.read();
     size = d.getSize();
-    arr = new int[size];
-    temps = new HashSet<String>();
+    arr1 = new int[size];
+    arr2 = new int[size];
+    temps1 = new HashSet<String>();
+    temps2 = new HashSet<String>();
     w = new PrintWriter("data_f.txt", "UTF-8");
   }
 
@@ -106,12 +110,12 @@ public class DataReader {
   }
 
   // reads a description, adding all the words in a temporary set
-  public void readDescription() throws IOException {
+  public void readDescription(HashSet<String> t) throws IOException {
     while (!shouldStop()) {
       String word = next();
       if (word != "") {
         // System.out.println(word);
-        temps.add(word);
+        t.add(word);
       }
     }
     c = r.read();
@@ -153,31 +157,17 @@ public class DataReader {
 
   public void readSet() throws IOException {
     // resets the temporary set that contains the words in 1 description
-    temps = new HashSet<String>();
-    readDescription();
-    // adds the words in the temporary set to the temp array
-    for (String w : temps) {
-      if (w.equals("dana")) {
-        System.out.println(w + " was called +1");
-      }
+    temps1 = new HashSet<String>();
+    temps2 = new HashSet<String>();
+    readDescription(temps1);
+    readDescription(temps2);
+    for (String w : temps1) {
       int v = d.getValue(w);
-      arr[v]++;
-      if (w.equals("subj")) {
-        System.out.println(w + " was called +1");
-        System.out.println(arr[v] + " is the number of the array of " + w);
-      }
+      arr1[v]++;
     }
-    temps = new HashSet<String>();
-    readDescription();
-    // does the same thing above, except since this is the second
-    // description, subtract 1 from array
-    for (String w : temps) {
+    for (String w : temps2) {
       int v = d.getValue(w);
-      arr[v]--;
-      if (w.equals("subj")) {
-        System.out.println(w + " was called -1");
-        System.out.println(arr[v] + " is the number of the array of " + w);
-      }
+      arr2[v]++;
     }
     // get the prices
     int p1 = getPrice();
@@ -208,23 +198,25 @@ public class DataReader {
       pdiff = -y_real;
       mturk_ratio = 1 / real_ratio;
     }
-    if (p2 > p1) {
-      for (int i = 0; i < arr.length; i++) {
-        arr[i] = -arr[i];
+    w.write(p1 + " ");
+    for (int i = 0; i < size; i++) {
+      if (i != arr1.length - 1) {
+        w.write(arr1[i] + " ");
+      } else {
+        w.write(arr1[i]);
       }
     }
-    w.write(pdiff + " ");
-    w.write(numberFormat.format(real_ratio) + " ");
-    w.write(numberFormat.format(mturk_ratio) + " ");
+    w.write(p2 + " ");
     for (int i = 0; i < size; i++) {
-      if (i != arr.length - 1) {
-        w.write(arr[i] + " ");
+      if (i != arr2.length - 1) {
+        w.write(arr2[i] + " ");
       } else {
-        w.write(arr[i]);
+        w.write(arr2[i]);
       }
     }
     w.write("\n");
-    arr = new int[size];
+    arr1 = new int[size];
+    arr2 = new int[size];
   }
 
   // function call to read the data file

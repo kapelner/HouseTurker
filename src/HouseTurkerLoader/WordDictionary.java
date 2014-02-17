@@ -52,10 +52,8 @@ public class WordDictionary {
       UnsupportedEncodingException {
     PrintWriter writer = new PrintWriter("dictmap.txt", "UTF-8");
     for (Map.Entry<String, Integer> entry : dict.entrySet()) {
-      if (entry.getValue() > 8930) {
-        writer.write("Key = " + entry.getKey() + ", Value = "
-            + entry.getValue() + "\n");
-      }
+      writer.write("Key = " + entry.getKey() + ", Value = " + entry.getValue()
+          + "\n");
     }
     writer.close();
   }
