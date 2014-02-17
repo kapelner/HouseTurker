@@ -3,6 +3,61 @@
 
 
 Xsub = as.matrix(X[, 1 : 500])
+mod = lm(y_diff ~ Xsub)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 1000])
+mod = lm(y_diff ~ Xsub)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 2000])
+mod = lm(y_diff ~ Xsub)
+summary(mod)
+
+
+hist(log(y_ratio_turk), br = 1000)
+
+Xsub = as.matrix(X[, 1 : 500])
+mod = lm(log(y_ratio_turk) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 1000])
+mod = lm(log(y_ratio_turk) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 2000])
+mod = lm(log(y_ratio_turk) ~ Xsub - 1)
+summary(mod)
+
+
+hist(log(y_ratio), br = 1000)
+
+Xsub = as.matrix(X[, 1 : 500])
+mod = lm(log(y_ratio) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 5])
+mod = lm(log(y_ratio) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 2000])
+mod = lm(log(y_ratio) ~ Xsub - 1)
+summary(mod)
+
+
+Xsub = as.matrix(X[, 1 : 500])
+mod = lm((log(y_ratio_turk) > 0) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 1000])
+mod = lm((log(y_ratio_turk) > 0) ~ Xsub - 1)
+summary(mod)
+
+Xsub = as.matrix(X[, 1 : 2000])
+mod = lm((log(y_ratio_turk) > 0) ~ Xsub - 1)
+summary(mod)
+
+
 
 
 #run some models
@@ -14,13 +69,13 @@ mod_coefs = coef(summary(mod))
 mod_coefs = mod_coefs[order(mod_coefs[, 4]), ]
 head(mod_coefs, 100)
 
-mod = lm(y_ratio_turk ~ Xsub)
+mod = lm(y_ratio_turk ~ Xsub - 1)
 summary(mod)
 
 mod = lm(y_diff_turk_bin ~ Xsub)
 summary(mod)
 
-Xsub = X[, 1 : 1000]
+Xsub = as.matrix(X[, 1 : 2000])
 
 mod = lm(y_diff ~ Xsub)
 summary(mod)
