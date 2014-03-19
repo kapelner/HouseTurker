@@ -7,12 +7,9 @@ colnames(X) = c("y_diff", "y_diff_turk", "y_ratio", "y_ratio_turk", word_names[1
 
 #pull out X and y
 y_diff = X[, 1]
-y_diff_turk = X[, 2]
+X = X[, 2 : ncol(X)]
 
-y_diff_turk_bin = ifelse(y_diff_turk > 0, 1, 0)
-y_ratio = X[, 3]
-y_ratio_turk = X[, 4]
-
+###############
 
 #checks
 sum(y_diff_turk > 0) / length(y_diff_turk)
