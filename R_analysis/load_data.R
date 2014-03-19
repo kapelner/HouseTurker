@@ -8,6 +8,11 @@ rm(word_names)
 
 #pull out X and y
 y_diff = X[, 1]
+y_diff_turk = X[, 2]
+
+y_diff_turk_bin = ifelse(y_diff_turk > 0, 1, 0)
+y_ratio = X[, 3]
+y_ratio_turk = X[, 4]
 
 #checks
 sum(y_diff_turk > 0) / length(y_diff_turk)
